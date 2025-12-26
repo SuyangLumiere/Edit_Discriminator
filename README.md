@@ -1,4 +1,4 @@
-# Edit Discriminator
+# 🔍 Edit Discriminator
 Edit Discriminator is an automated Quality Assurance (QA) toolkit for AIGC image editing tasks. Powered by the Qwen3-VL multimodal model, it evaluates instruction following, local consistency, and global preservation, providing both a confidence score and a Refinement Prompt for failed edits.
 
 ---
@@ -96,4 +96,4 @@ Feel free to open issues or submit PRs if you have ideas for better system promp
 If you find this project helpful or interesting, a star would be greatly appreciated! Your support motivates us to keep improving. ⭐
 
 
-[![Star History Chart](https://api.star-history.com/svg?repos=SuyangLumiere/EditDiscriminator&type=date&legend=top-left)](https://www.star-history.com/#SuyangLumiere/EditDiscriminator&type=date&legend=top-left)
+[![Star History Chart](https://api.star-history.com/svg?repos=SuyangLumiere/Edit_Discriminator&type=date&legend=top-left)](https://www.star-history.com/#SuyangLumiere/Edit_Discriminator&type=date&legend=top-left)
