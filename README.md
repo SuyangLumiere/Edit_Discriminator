@@ -15,7 +15,7 @@ Edit Discriminator is an automated Quality Assurance (QA) toolkit for AIGC image
 
 - Dataset Ready: Built-in support for processing paired directories (/input and /output) and logging results to JSONL.
 
----
+
 
 ## 🚀 Quick Start
 
@@ -54,22 +54,23 @@ Edit Discriminator is an automated Quality Assurance (QA) toolkit for AIGC image
    python batch_process_demo.py
   ```
 
----
+
 
 ## 🛠️ Internal Logic
+
 1. Scoring Mechanism
 
 The auditor doesn't just give a "Yes" or "No". It calculates the confidence score based on the model's logits:
 
-$$
-Score= \frac{P(Yes)−P(No)}{P(No)}
-$$​	
+$$\qquad \text{Score}= \frac{P(Yes)−P(No)}{P(No)}$$​	
  
 This allows you to set custom thresholds for data filtering.
 
 2. Refinement Protocol
 
 When an edit fails, the model identifies specific issues (e.g., "color mismatch", "broken textures") and outputs a prompt starting with ROP to be fed back into your generation pipeline.
+
+
 
 ## 📂 Project Structure
 
@@ -87,10 +88,11 @@ Edit Discriminator/
 
 ---
 
+
 ## 🤝 Contributing
 Feel free to open issues or submit PRs if you have ideas for better system prompts or scoring algorithms!
 
----
+
 
 ## Star History
 
