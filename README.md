@@ -1,19 +1,19 @@
 # 🔍 Edit Discriminator
 Edit Discriminator is an automated Quality Assurance (QA) toolkit for AIGC image editing tasks. Powered by the Qwen3-VL multimodal model, it evaluates instruction following, local consistency, and global preservation, providing both a confidence score and a Refinement Prompt for failed edits.
 
+<img src="img/wrong_demo.png" width="800" />
+
 ---
 
 ## 🌟 Key Features
 
-<img src="img/wrong_demo.png" width="1000" />
+- Automated Audit: Replaces manual inspection by judging whether an edit strictly follows the user instruction.
 
-Automated Audit: Replaces manual inspection by judging whether an edit strictly follows the user instruction.
+- Confidence Scoring: Uses logit-based relative difference between "Yes" and "No" tokens to provide a reliable quality score.
 
-Confidence Scoring: Uses logit-based relative difference between "Yes" and "No" tokens to provide a reliable quality score.
+- Refinement Loop: Automatically generates a precise "Refinement Prompt" to guide the diffusion model in fixing errors.
 
-Refinement Loop: Automatically generates a precise "Refinement Prompt" to guide the diffusion model in fixing errors.
-
-Dataset Ready: Built-in support for processing paired directories (/input and /output) and logging results to JSONL.
+- Dataset Ready: Built-in support for processing paired directories (/input and /output) and logging results to JSONL.
 
 ---
 
