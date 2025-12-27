@@ -42,19 +42,17 @@ Edit Discriminator is an automated Quality Assurance (QA) toolkit for AIGC image
 
 **Basic Usage**
 
-Use the Qwen3VLModel to perform a quick check on a single image pair:
-
-    ```python
-    python demo.py
-    ```
+- Use the Qwen3VLModel to perform a quick check on a single image pair:
+  ```bash
+   python demo.py
+  ```
 
 **Batch Processing**
 
-Perfect for cleaning large-scale synthetic datasets:
-
-    ```python
-    python batch_process_demo.py
-    ```
+- Perfect for cleaning large-scale synthetic datasets:
+  ```bash
+   python batch_process_demo.py
+  ```
 
 ---
 
