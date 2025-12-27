@@ -21,21 +21,23 @@ class VLResult:
         return parts[-1].strip() if len(parts) > 1 else ""
     
     @property
-    def response(self) -> str:
+    def comment(self) -> str:
         parts = self.raw_response.split(self.flag)
         return parts[0].strip()
     
     def to_dict(self):
-        data = asdict(self)
-        del data["flag"]
+        # data = asdict(self)
+        data = {}
         data.update({
+            "score":self.score,
             "is_success": self.is_success,
+            "comment": self.comment,
             "refine_prompt": self.refine_prompt
         })
         return data
 
     def __str__(self):
-        return f"Success: {self.is_success} | Score: {self.score:.4f}\nPrompt: {self.response}"
+        return f"Success: {self.is_success} | Score: {self.score:.4f}\nPrompt: {self.comment}"
 
 
 # qwen3VL
@@ -61,6 +63,7 @@ class Qwen3VLModel:
         
 
     def __call__(self, img_pair, user_prompt: str = "Has this picture edited properly?"):
+        img_pair = [str(p) for p in img_pair]
         inputs = self._prepare_inputs(img_pair, user_prompt)
         raw_text = self._generate_text(inputs)
         score_val = self._calculate_score(inputs)

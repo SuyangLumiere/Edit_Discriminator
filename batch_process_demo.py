@@ -17,5 +17,5 @@ def main():
         })
         logger(res_dict)
 
-if __name__ is "__main__":
+if __name__ == "__main__":
     main()

@@ -4,6 +4,9 @@ Edit Discriminator is an automated Quality Assurance (QA) toolkit for AIGC image
 ---
 
 ## 🌟 Key Features
+
+<img src="img/wrong_demo.png" width="1000" />
+
 Automated Audit: Replaces manual inspection by judging whether an edit strictly follows the user instruction.
 
 Confidence Scoring: Uses logit-based relative difference between "Yes" and "No" tokens to provide a reliable quality score.
