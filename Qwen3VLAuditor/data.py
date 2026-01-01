@@ -1,3 +1,4 @@
+import traceback
 import pandas as pd
 from pathlib import Path
 
@@ -10,11 +11,11 @@ def path_done_well(*paths):
 class PairDataset:
     def __init__(self, img_dir=None, edit_dir=None, resume_from=None, **kwargs):
 
-
         self.img_dir, self.edit_dir = path_done_well(img_dir, edit_dir)
         self.resume_path = path_done_well(resume_from) if resume_from else None
-        self._iter_index = 0
-
+        self.rank = None
+        self.world_size = None
+        
         try:
             img_list = [p.resolve() for p in sorted(self.img_dir.glob("*.png"))]
             edit_list = [p.resolve() for p in sorted(self.edit_dir.glob("*.png"))]
@@ -31,35 +32,47 @@ class PairDataset:
             })
 
         except Exception as e:
-            print(f"Error loading dataset pairs: {e}")
-
-        self.length = len(self.pairs)
+            traceback.print_exc()
+            # print(f"Error loading dataset pairs: {e}")
 
         if self.resume_path and self.resume_path.exists():
             print(f"Found resume file: {self.resume_path}, calculating remaining tasks...")
-            try:
-                dat = pd.read_json(self.resume_path, lines=True)['edit_path']
-                self.pairs = self.pairs[~self.pairs["img"].astype(str).isin(set(dat))]
-                print(f"Resumed: {self.length} -> {self.length := len(self.pairs)} tasks remaining...")
-                
-            except Exception as e:
-                print(f"Error resuming from {self.resume_path}: {e}")
-        
+            self.length = self.get_resume()
+        else:
+            self.length = len(self.pairs)
+
+
+    def get_resume(self):
+        try:
+            dat = pd.read_json(self.resume_path, lines=True)['edit_path']
+            self.pairs = self.pairs[~self.pairs["img"].astype(str).isin(set(dat))]
+            length = len(self.pairs)
+            print(f"Resumed: {length} tasks remaining...")
+
+        except Exception as e:
+            traceback.print_exc()
+            print(f"Error resuming from {self.resume_path}: {e}")
+
+        return length
 
     def prompter(self):
         return "Has this picture edited properly?"
+    
+    def split(self, rank, world_size):
+        self.rank = rank
+        self.world_size = world_size
 
     def __iter__(self):
-        return self
-    
-    def __next__(self):
-
-        if self._iter_index < self.length:
-            dat = self.pairs.iloc[self._iter_index]
-            img = dat["img"]
-            item = dat["edit"]
-            self._iter_index += 1
-
-            return img, item, self.prompter()
+        if not self.rank:
+            for _, row in self.pairs.iterrows():
+                img = row["img"]
+                item = row["edit"]
+                yield img, item, self.prompter()
         else:
-            raise StopIteration
+            data = self.pairs.iloc[self.rank::self.world_size]
+            for _, row in data.iterrows():
+                img = row["img"]
+                item = row["edit"]
+                yield img, item, self.prompter()
+
+
