@@ -57,7 +57,7 @@ def main():
     img_dir = "/input/"
     edit_dir = "/output/"
 
-    data = PairDataset(img_dir=img_dir, edit_dir=edit_dir)
+    data = PairDataset(img_dir=img_dir, edit_dir=edit_dir, max_size=10000, big_image_filter=True)
     model = Qwen3VLModel(model_path="/path/to/Qwen3-VL-8B-Instruct")
     logger = ResultLogger(save_path="results.jsonl")
 
