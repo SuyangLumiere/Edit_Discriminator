@@ -1,0 +1,15 @@
+-e .
+accelerate>=1.9.0
+einops>=0.8.0
+transformers>=4.45.0
+huggingface-hub>=0.24.0
+sentencepiece>=0.2.0
+opencv-python>=4.10.0
+matplotlib>=3.9.0
+onnxruntime>=1.20.0
+torchvision>=0.19.0
+timm>=1.0.9
+qwen_vl_utils>=0.0.8
+pandas>=2.0.0
+tqdm>=4.66.0
+Pillow>=10.0.0
